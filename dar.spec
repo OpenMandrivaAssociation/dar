@@ -1,24 +1,28 @@
 %define name dar
-%define ver 2.3.1
-%define release %mkrel 2
+%define version 2.3.3
+%define release %mkrel 1
 
-%define major   3
+%define major   4
 %define libname %mklibname %name %major
+%define develname %mklibname %name -d
+%define staticname %mklibname %name -d -s
 
 summary: DAR - Disk ARchive
 Name:           %{name}
-Version:        %{ver}
+Version:        %{version}
 Release:        %{release}
 URL:            http://dar.linux.free.fr/
 License:        GPL
-Icon:           dar.gif
 Group:          Archiving/Backup
-Source:         http://dar.linux.free.fr/%name-%ver.tar.bz2
+Source:         http://dar.linux.free.fr/%name-%version.tar.bz2
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires:  zlib-devel >= 1.1.3, gcc-c++, bzip2-devel >= 1.0.2
+BuildRequires:  zlib-devel 
+BuildRequires:	gcc-c++ 
+BuildRequires:	bzip2-devel
 BuildRequires:  libstdc++-static-devel 
-BuildRequires:  libattr-devel libacl-devel
+BuildRequires:  libattr-devel 
+BuildRequires:	libacl-devel
 BuildRequires:  glibc-static-devel
 BuildRequires:  openssl-static-devel
 BuildRequires:  doxygen
@@ -34,31 +38,49 @@ and symbolic links.
 
 %package -n %libname
 Group:          System/Libraries
-Summary:        Libraries from %Name
+Summary:        Shared library for %{name}
 Provides:       lib%name = %version-%release
 
 %description -n %libname
-The libraries from %Name package
+DAR is a command line tool to backup a directory tree and files. DAR is
+able to make differential backups, split them over a set of disks or files
+of a given size, use compression, filter files or subtrees to be saved or
+not saved, directly access and restore given files. DAR is also able
+to handle extented attributes, and can make remote backups through an
+ssh session for example. Finally, DAR handles save and restore of hard
+and symbolic links.
 
-%package -n %libname-devel
+
+%package -n %develname
 Group:          Development/Other
-Summary:        Libraries from %Name
+Summary:        Development headers for %{name}
 Requires:       %libname = %version
-Provides:       lib%name-devel = %version-%release
 Provides:       %{name}-devel = %{version}-%{release}
 
-%description -n %libname-devel
-The libraries from %Name package
+%description -n %develname
+DAR is a command line tool to backup a directory tree and files. DAR is
+able to make differential backups, split them over a set of disks or files
+of a given size, use compression, filter files or subtrees to be saved or
+not saved, directly access and restore given files. DAR is also able
+to handle extented attributes, and can make remote backups through an
+ssh session for example. Finally, DAR handles save and restore of hard
+and symbolic links.
 
-%package -n %libname-static-devel
+
+%package -n %staticname
 Group:          Development/Other
-Summary:        Static libraries from %Name
+Summary:        Static development headers for %{name}
 Requires:       %libname = %version
-Provides:       lib%name-devel = %version-%release
-Provides:       %{name}-devel = %{version}-%{release}
+Provides:       %{name}-static-devel = %{version}-%{release}
 
-%description -n %libname-static-devel
-The static libraries from %Name package
+%description -n %staticname
+DAR is a command line tool to backup a directory tree and files. DAR is
+able to make differential backups, split them over a set of disks or files
+of a given size, use compression, filter files or subtrees to be saved or
+not saved, directly access and restore given files. DAR is also able
+to handle extented attributes, and can make remote backups through an
+ssh session for example. Finally, DAR handles save and restore of hard
+and symbolic links.
 
 %prep
 %setup -q 
@@ -102,19 +124,19 @@ rm -f %buildroot/%_bindir/dar_static
 /sbin/*
 %{_mandir}/man1/*
 %{_datadir}/%name
-%{_libdir}/pkgconfig/libdar.pc
 
 %files -n %libname
 %defattr(-,root,root)
 %{_libdir}/*.so.*
 
-%files -n %libname-devel
+%files -n %develname
 %defattr (-,root,root)
 %{_includedir}/dar
 %{_libdir}/*.la
 %{_libdir}/*.so
+%{_libdir}/pkgconfig/lib%{name}.pc
 
-%files -n %libname-static-devel
+%files -n %staticname
 %defattr (-,root,root)
 %{_libdir}/*.a
 
