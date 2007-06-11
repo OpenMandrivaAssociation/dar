@@ -1,6 +1,6 @@
 %define name dar
 %define version 2.3.3
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major   4
 %define libname %mklibname %name %major
@@ -108,6 +108,14 @@ install -d %buildroot/sbin
 install %buildroot/%_bindir/dar_static  %buildroot/sbin/
 rm -f %buildroot/%_bindir/dar_static 
 
+# install macro_tools.hpp in the -devel package, as kdar (incorrectly)
+# uses it. This hack should be removed when kdar is fixed not to #include
+# macro_tools.hpp in its src/kdar_part/kdarmanager/archivemanager.cpp
+# AdamW, 2007/06
+
+install -m 644 src/libdar/macro_tools.hpp %buildroot%_includedir/%name
+perl -pi -e 's,../my_config.h,my_config.h,g' %buildroot%_includedir/%name/macro_tools.hpp
+
 %clean
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
@@ -131,7 +139,7 @@ rm -f %buildroot/%_bindir/dar_static
 
 %files -n %develname
 %defattr (-,root,root)
-%{_includedir}/dar
+%{_includedir}/%name
 %{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/lib%{name}.pc
