@@ -1,5 +1,5 @@
 %define name dar
-%define version 2.3.4
+%define version 2.3.5
 %define release %mkrel 1
 
 %define major 4
@@ -14,7 +14,7 @@ Release:	%{release}
 URL:		http://dar.linux.free.fr/
 License:	GPL
 Group:		Archiving/Backup
-Source0:	http://dar.linux.free.fr/%{name}-%{version}.tar.bz2
+Source0:	http://nchc.dl.sourceforge.net/sourceforge/dar/%{name}-%{version}.tar.gz
 BuildRequires:	zlib-devel 
 BuildRequires:	gcc-c++ 
 BuildRequires:	bzip2-devel
