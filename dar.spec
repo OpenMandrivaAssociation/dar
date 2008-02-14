@@ -14,6 +14,7 @@ Release:	%{release}
 URL:		http://dar.linux.free.fr/
 License:	GPLv2+
 Group:		Archiving/Backup
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:	http://nchc.dl.sourceforge.net/sourceforge/dar/%{name}-%{version}.tar.gz
 BuildRequires:	zlib-devel 
 BuildRequires:	gcc-c++ 
