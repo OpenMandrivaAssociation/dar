@@ -1,20 +1,16 @@
-%define name dar
-%define version 2.3.6
-%define release %mkrel 1
+%define major		4
+%define libname		%mklibname %{name} %{major}
+%define develname	%mklibname %{name} -d
+%define staticname	%mklibname %{name} -d -s
 
-%define major 4
-%define libname %mklibname %{name} %{major}
-%define develname %mklibname %{name} -d
-%define staticname %mklibname %{name} -d -s
-
-Summary:	DAR - Disk ARchive
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Summary:	Shell command to back up directory trees and files
+Name:		dar
+Version:	2.3.7
+Release:	%{mkrel 1}
 URL:		http://dar.linux.free.fr/
 License:	GPLv2+
 Group:		Archiving/Backup
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:	http://nchc.dl.sourceforge.net/sourceforge/dar/%{name}-%{version}.tar.gz
 BuildRequires:	zlib-devel 
 BuildRequires:	gcc-c++ 
@@ -98,8 +94,6 @@ install -m 644 doc/samples/README README.samples
 
 %find_lang %{name}
 
-#chmod a+x $RPM_BUILD_ROOT%{_datadir}/dar/*.duc
-
 # mv dar_static to /sbin , just in case :-) 
 install -d %{buildroot}/sbin
 install %{buildroot}%{_bindir}/dar_static  %{buildroot}/sbin/
@@ -121,7 +115,7 @@ rm -f %{buildroot}%{_bindir}/dar_static
 
 %files -n %{libname}
 %defattr(-,root,root)
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
 %defattr (-,root,root)
