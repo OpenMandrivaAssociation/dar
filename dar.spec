@@ -99,9 +99,13 @@ install -d %{buildroot}/sbin
 install %{buildroot}%{_bindir}/dar_static  %{buildroot}/sbin/
 rm -f %{buildroot}%{_bindir}/dar_static 
 
+%if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun  -n %{libname} -p /sbin/ldconfig
+%endif
 
 %files -f %{name}.lang
 %defattr(-,root,root)
