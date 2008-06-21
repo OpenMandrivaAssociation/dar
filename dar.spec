@@ -5,8 +5,8 @@
 
 Summary:	Shell command to back up directory trees and files
 Name:		dar
-Version:	2.3.7
-Release:	%{mkrel 1}
+Version:	2.3.8
+Release:	%mkrel 1
 URL:		http://dar.linux.free.fr/
 License:	GPLv2+
 Group:		Archiving/Backup
@@ -81,7 +81,7 @@ and symbolic links.
 %setup -q 
 
 %build
-%configure --disable-upx 
+%configure2_5x --disable-upx 
 %make
 
 %install
@@ -131,4 +131,3 @@ rm -f %{buildroot}%{_bindir}/dar_static
 %files -n %{staticname}
 %defattr (-,root,root)
 %{_libdir}/*.a
-
