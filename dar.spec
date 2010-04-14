@@ -5,7 +5,7 @@
 
 Summary:	Shell command to back up directory trees and files
 Name:		dar
-Version:	2.3.9
+Version:	2.3.10
 Release:	%mkrel 1
 URL:		http://dar.linux.free.fr/
 License:	GPLv2+
