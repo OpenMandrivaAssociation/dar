@@ -1,22 +1,22 @@
-%define major		4
+%define major		5
 %define libname		%mklibname %{name} %{major}
 %define develname	%mklibname %{name} -d
 %define staticname	%mklibname %{name} -d -s
 
 Summary:	Shell command to back up directory trees and files
 Name:		dar
-Version:	2.3.10
-Release:	%mkrel 2
+Version:	2.4.2
+Release:	%mkrel 1
 URL:		http://dar.linux.free.fr/
 License:	GPLv2+
 Group:		Archiving/Backup
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:	http://nchc.dl.sourceforge.net/sourceforge/dar/%{name}-%{version}.tar.gz
-BuildRequires:	zlib-devel 
-BuildRequires:	gcc-c++ 
+BuildRequires:	zlib-devel
+BuildRequires:	gcc-c++
 BuildRequires:	bzip2-devel
-BuildRequires:	libstdc++-static-devel 
-BuildRequires:	libattr-devel 
+BuildRequires:	libstdc++-static-devel
+BuildRequires:	libattr-devel
 BuildRequires:	libacl-devel
 BuildRequires:	glibc-static-devel
 BuildRequires:	openssl-static-devel
@@ -116,6 +116,7 @@ rm -f %{buildroot}%{_bindir}/dar_static
 /sbin/*
 %{_mandir}/man1/*
 %{_datadir}/%{name}
+%config(noreplace) %{_sysconfdir}/%{name}rc
 
 %files -n %{libname}
 %defattr(-,root,root)
