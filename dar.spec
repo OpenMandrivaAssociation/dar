@@ -1,17 +1,16 @@
 %define major		5
 %define libname		%mklibname %{name} %{major}
 %define develname	%mklibname %{name} -d
-%define staticname	%mklibname %{name} -d -s
 
 Summary:	Shell command to back up directory trees and files
 Name:		dar
-Version:	2.4.2
+Version:	2.4.3
 Release:	%mkrel 1
 URL:		http://dar.linux.free.fr/
 License:	GPLv2+
 Group:		Archiving/Backup
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Source0:	http://nchc.dl.sourceforge.net/sourceforge/dar/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/project/dar/%{name}/v%{version}/%{name}-%{version}.tar.gz
+Patch0:		dar-2.4.3-mdv-shebang.patch
 BuildRequires:	zlib-devel
 BuildRequires:	gcc-c++
 BuildRequires:	bzip2-devel
@@ -27,21 +26,20 @@ DAR is a command line tool to backup a directory tree and files. DAR is
 able to make differential backups, split them over a set of disks or files
 of a given size, use compression, filter files or subtrees to be saved or
 not saved, directly access and restore given files. DAR is also able
-to handle extented attributes, and can make remote backups through an
+to handle extended attributes, and can make remote backups through an
 ssh session for example. Finally, DAR handles save and restore of hard
 and symbolic links.
 
 %package -n 	%{libname}
 Group:		System/Libraries
 Summary:	Shared library for %{name}
-Provides:	lib%{name} = %{version}-%{release}
 
 %description -n	%{libname}
 DAR is a command line tool to backup a directory tree and files. DAR is
 able to make differential backups, split them over a set of disks or files
 of a given size, use compression, filter files or subtrees to be saved or
 not saved, directly access and restore given files. DAR is also able
-to handle extented attributes, and can make remote backups through an
+to handle extended attributes, and can make remote backups through an
 ssh session for example. Finally, DAR handles save and restore of hard
 and symbolic links.
 
@@ -50,70 +48,42 @@ and symbolic links.
 Group:		Development/Other
 Summary:	Development headers for %{name}
 Requires:	%libname = %{version}
-Provides:	%{name}-devel = %{version}-%{release}
+Provides:	%{name}-devel = %{EVRD}
 
 %description -n	%{develname}
 DAR is a command line tool to backup a directory tree and files. DAR is
 able to make differential backups, split them over a set of disks or files
 of a given size, use compression, filter files or subtrees to be saved or
 not saved, directly access and restore given files. DAR is also able
-to handle extented attributes, and can make remote backups through an
+to handle extended attributes, and can make remote backups through an
 ssh session for example. Finally, DAR handles save and restore of hard
 and symbolic links.
 
-
-%package -n	%{staticname}
-Group:		Development/Other
-Summary:	Static development headers for %{name}
-Requires:	%{libname} = %{version}
-Provides:	%{name}-static-devel = %{version}-%{release}
-
-%description -n %{staticname}
-DAR is a command line tool to backup a directory tree and files. DAR is
-able to make differential backups, split them over a set of disks or files
-of a given size, use compression, filter files or subtrees to be saved or
-not saved, directly access and restore given files. DAR is also able
-to handle extented attributes, and can make remote backups through an
-ssh session for example. Finally, DAR handles save and restore of hard
-and symbolic links.
 
 %prep
-%setup -q 
+%setup -q
+%patch0 -p1
 
 %build
-%configure2_5x --disable-upx 
+%configure2_5x --disable-upx --disable-static
 %make
 
 %install
-rm -rf %{buildroot}
-
 # fix-up docs
 install -m 644 doc/samples/README README.samples
 
 %makeinstall_std
+find %{buildroot} -name '*.la' -delete
 
 %find_lang %{name}
 
-# mv dar_static to /sbin , just in case :-) 
-install -d %{buildroot}/sbin
-install %{buildroot}%{_bindir}/dar_static  %{buildroot}/sbin/
-rm -f %{buildroot}%{_bindir}/dar_static 
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun  -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files -f %{name}.lang
 %defattr(-,root,root)
-%doc AUTHORS ChangeLog INSTALL NEWS README THANKS TODO
+%doc AUTHORS ChangeLog NEWS README THANKS TODO
 %doc README.samples doc/samples/cdbackup.sh doc/samples/darrc_sample doc/samples/sample1.txt
 %doc doc/mini-howto/dar-differential-backup-mini-howto.*.html
 %{_bindir}/*
-/sbin/*
+#/sbin/*
 %{_mandir}/man1/*
 %{_datadir}/%{name}
 %config(noreplace) %{_sysconfdir}/%{name}rc
@@ -125,10 +95,5 @@ rm -f %{buildroot}%{_bindir}/dar_static
 %files -n %{develname}
 %defattr (-,root,root)
 %{_includedir}/%{name}
-%{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/lib%{name}.pc
-
-%files -n %{staticname}
-%defattr (-,root,root)
-%{_libdir}/*.a
