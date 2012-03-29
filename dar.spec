@@ -16,7 +16,7 @@ BuildRequires:	gcc-c++
 BuildRequires:	bzip2-devel
 BuildRequires:	libstdc++-static-devel
 BuildRequires:	libattr-devel
-BuildRequires:	libacl-devel
+BuildRequires:	acl-devel
 BuildRequires:	glibc-static-devel
 BuildRequires:	openssl-static-devel
 BuildRequires:	doxygen
