@@ -97,3 +97,128 @@ find %{buildroot} -name '*.la' -delete
 %{_includedir}/%{name}
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/lib%{name}.pc
+
+
+%changelog
+* Thu Sep 20 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 2.4.8-1
++ Revision: 817171
+- update to 2.4.8
+
+* Tue Jul 10 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 2.4.7-1
++ Revision: 808730
+- update to 2.4.7
+
+* Fri Jun 29 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 2.4.6-1
++ Revision: 807509
+- update to 2.4.6
+
+* Wed Apr 18 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 2.4.5-1
++ Revision: 791726
+- update to 2.4.5
+
+* Thu Mar 29 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 2.4.4-1
++ Revision: 788212
+- update to 2.4.4
+
+* Thu Mar 01 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 2.4.3-1
++ Revision: 781616
+- new version 2.4.3
+- don't build static libs
+
+* Sun Oct 16 2011 Andrey Bondrov <abondrov@mandriva.org> 2.4.2-1
++ Revision: 704847
+- New version 2.4.2, new major 5
+
+* Sun Dec 05 2010 Oden Eriksson <oeriksson@mandriva.com> 2.3.10-2mdv2011.0
++ Revision: 610190
+- rebuild
+
+* Thu Apr 15 2010 Sandro Cazzaniga <kharec@mandriva.org> 2.3.10-1mdv2010.1
++ Revision: 534942
+- new release 2.3.10
+
+* Sat May 23 2009 Frederik Himpe <fhimpe@mandriva.org> 2.3.9-1mdv2010.0
++ Revision: 379051
+- update to new version 2.3.9
+
+* Sat Jun 21 2008 Funda Wang <fwang@mandriva.org> 2.3.8-1mdv2009.0
++ Revision: 227663
+- New version 2.3.8
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Sat Mar 01 2008 Adam Williamson <awilliamson@mandriva.org> 2.3.7-1mdv2008.1
++ Revision: 177114
+- protect major in file list
+- minor spec cleanups
+- new release 2.3.7
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - fix no-buildroot-tag
+
+* Thu Dec 06 2007 Adam Williamson <awilliamson@mandriva.org> 2.3.6-1mdv2008.1
++ Revision: 115797
+- new release 2.3.6
+- new license policy
+- remove a workaround that was introduced for kdar, as kdar is basically dead
+
+* Mon Aug 27 2007 Funda Wang <fwang@mandriva.org> 2.3.5-1mdv2008.0
++ Revision: 71738
+- New version 2.3.5
+
+* Thu Jul 12 2007 Adam Williamson <awilliamson@mandriva.org> 2.3.4-1mdv2008.0
++ Revision: 51677
+- spec clean (from frederik himpe)
+- new release 2.3.4 (from frederik himpe)
+
+* Mon Jun 11 2007 Adam Williamson <awilliamson@mandriva.org> 2.3.3-2mdv2008.0
++ Revision: 38087
+- include macro_tools.hpp in libdar-devel for kdar
+
+* Sun Jun 10 2007 Adam Williamson <awilliamson@mandriva.org> 2.3.3-1mdv2008.0
++ Revision: 37738
+- move .pc file to devel package
+- clean and correct provides
+- clean descriptions
+- go with the new devel policy
+- correct major (4)
+- new release 2.3.3
+
+
+* Mon Aug 14 2006 Nicolas Lécureuil <neoclust@mandriva.org> 2.3.1-2mdv2007.0
+- Fix rpmlint warnings
+
+* Sat Jul 01 2006 Emmanuel Andry <eandry@mandriva.org> 2.3.1-1mdv2007.0
+- New release 2.3.1
+
+* Sun May 07 2006 Jerome Soyer <saispo@mandriva.org> 2.3.0-1mdk
+- New release 2.3.0
+- Fix doc build
+
+* Wed Dec 07 2005 Lenny Cartier <lenny@mandriva.com> 2.2.5-1mdk
+- 2.2.5
+
+* Mon Aug 22 2005 Frederic Crozat <fcrozat@mandriva.com> 2.2.2-3mdk 
+- Rebuild with latest gcc
+
+* Sun Jun 05 2005 Frederic Crozat <fcrozat@mandriva.com> 2.2.2-2mdk 
+- Set executable bit on par scripts
+
+* Sun Jun 05 2005 Frederic Crozat <fcrozat@mandriva.com> 2.2.2-1mdk
+- Release 2.2.2
+
+* Sun May 08 2005 Frederic Crozat <fcrozat@mandriva.com> 2.2.1-2mdk 
+- Fix buildrequires
+
+* Sun May 08 2005 Frederic Crozat <fcrozat@mandriva.com> 2.2.1-1mdk 
+- Release 2.2.1
+- clean specfile
+- build with EA support now
+
+* Tue Sep 28 2004 Svetoslav Slavtchev <svetljo@gmx.de> 2.1.5-2mdk
+- fix group and post/pre scripts
+
+* Tue Sep 28 2004 Svetoslav Slavtchev <svetljo@gmx.de> 2.1.5-1mdk
+- initial contrib package
+
