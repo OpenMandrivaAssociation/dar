@@ -15,10 +15,10 @@ BuildRequires:	zlib-devel
 BuildRequires:	gcc-c++
 BuildRequires:	bzip2-devel
 BuildRequires:	libstdc++-static-devel
-BuildRequires:	libattr-devel
+BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(libattr)
 BuildRequires:	acl-devel
 BuildRequires:	glibc-static-devel
-BuildRequires:	openssl-static-devel
 BuildRequires:	doxygen
 
 %description
