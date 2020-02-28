@@ -4,13 +4,13 @@
 
 Summary:	Shell command to back up directory trees and files
 Name:		dar
-Version:	2.4.8
-Release:	2
+Version:	2.6.8
+Release:	1
 URL:		http://dar.linux.free.fr/
 License:	GPLv2+
 Group:		Archiving/Backup
 Source0:	http://downloads.sourceforge.net/project/dar/%{name}/v%{version}/%{name}-%{version}.tar.gz
-Patch0:		dar-2.4.3-mdv-shebang.patch
+#Patch0:		dar-2.4.3-mdv-shebang.patch
 BuildRequires:	zlib-devel
 BuildRequires:	gcc-c++
 BuildRequires:	bzip2-devel
@@ -62,17 +62,16 @@ and symbolic links.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-%configure2_5x --disable-upx --disable-static
-%make
+%configure --disable-upx --disable-static
+%make_build
 
 %install
 # fix-up docs
 install -m 644 doc/samples/README README.samples
 
-%makeinstall_std
+%make_install
 find %{buildroot} -name '*.la' -delete
 
 %find_lang %{name}
@@ -186,7 +185,7 @@ find %{buildroot} -name '*.la' -delete
 - new release 2.3.3
 
 
-* Mon Aug 14 2006 Nicolas Lécureuil <neoclust@mandriva.org> 2.3.1-2mdv2007.0
+* Mon Aug 14 2006 Nicolas LÃ©cureuil <neoclust@mandriva.org> 2.3.1-2mdv2007.0
 - Fix rpmlint warnings
 
 * Sat Jul 01 2006 Emmanuel Andry <eandry@mandriva.org> 2.3.1-1mdv2007.0
